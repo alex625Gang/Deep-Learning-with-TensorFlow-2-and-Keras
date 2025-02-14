@@ -65,4 +65,8 @@ test_loss, test_acc = model.evaluate(X_test, Y_test)
 print('Test accuracy:', test_acc)
 
 # making prediction
+# predictions 是 10000 x 10 的矩阵
 predictions = model.predict(X_test)
+# 这里对x_test的数据集做预测，返回的是一个概率值，我们可以通过argmax函数找到最大的概率值对应的索引
+print(model.predict(X_test)[1])
+

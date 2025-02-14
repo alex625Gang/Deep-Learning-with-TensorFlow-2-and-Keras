@@ -9,9 +9,9 @@ np.random.seed(1671)
 EPOCHS = 200
 BATCH_SIZE = 128
 VERBOSE = 1
-NB_CLASSES = 10   # number of outputs = number of digits
+NB_CLASSES = 10  # number of outputs = number of digits
 N_HIDDEN = 128
-VALIDATION_SPLIT=0.2 # how much TRAIN is reserved for VALIDATION
+VALIDATION_SPLIT = 0.2  # how much TRAIN is reserved for VALIDATION
 
 # loading MNIST dataset
 # verify
@@ -19,15 +19,29 @@ VALIDATION_SPLIT=0.2 # how much TRAIN is reserved for VALIDATION
 # one-hot is automatically applied
 mnist = keras.datasets.mnist
 (X_train, Y_train), (X_test, Y_test) = mnist.load_data()
-print(X_train.shape[0], 'train samples')
-print(X_test.shape[0], 'test samples')
+print(len(X_train))
+print(X_train.shape[0], 'X_train 0')
+# mnist数据多为0，不为零的数就是1-255
+# print(X_train.shape[1], 'X_train 1')
+# print(X_train.shape[2], 'X_train 2')
+# for i in range(X_train.shape[0]):
+#     for j in range(X_train.shape[1]):
+#         for k in range(X_train.shape[2]):
+#             if X_train[i][j][k] != 0:
+#                 print(X_train[i][j][k])
 
+# x_train is 60000 rows of 28x28 values --> reshaped in 60000 x 784
 
-#normalize in [0,1]
+# x_test is 10000 rows of 28x28 values --> reshaped in 10000 x 784
+print(X_test.shape[0], 'X_test 0')
+print(X_test.shape[1], 'X_test 1')
+print(X_test.shape[2], 'X_test 2')
+# normalize in [0,1]
 X_train, X_test = X_train / 255.0, X_test / 255.0
-#X_train is 60000 rows of 28x28 values --> reshaped in 60000 x 784
+# X_train is 60000 rows of 28x28 values --> reshaped in 60000 x 784
 RESHAPED = 784
-#
+# reshape 只要形状合适，就可以
+# X_train = X_train.reshape(60000, 28,14,2)
 X_train = X_train.reshape(60000, RESHAPED)
 X_test = X_test.reshape(10000, RESHAPED)
 Y_train = Y_train.astype('float32')
@@ -35,25 +49,27 @@ Y_test = Y_test.astype('float32')
 
 model = tf.keras.models.Sequential()
 model.add(keras.layers.Dense(NB_CLASSES,
-   		input_shape=(RESHAPED,), kernel_initializer='zeros',
-   		name='dense_layer', activation='softmax'))
-
+                             input_shape=(RESHAPED,), kernel_initializer='zeros',
+                             name='dense_layer', activation='softmax'))
+# relu的准确率只有0.09，softmax和sigmoid可以达到0.9以上
 # summary of the model
 model.summary()
 
 # compiling the model
-model.compile(optimizer='SGD', 
+model.compile(optimizer='SGD',
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
 
-#training the moodel
+# training the moodel
 model.fit(X_train, Y_train,
-		batch_size=BATCH_SIZE, epochs=EPOCHS,
-		verbose=VERBOSE, validation_split=VALIDATION_SPLIT)
+          batch_size=BATCH_SIZE, epochs=EPOCHS,
+          verbose=VERBOSE, validation_split=VALIDATION_SPLIT)
 
-#evalute the model
+# evalute the model
 test_loss, test_acc = model.evaluate(X_test, Y_test)
 print('Test accuracy:', test_acc)
+print('Test loss:', test_loss)
 
 # making prediction
 predictions = model.predict(X_test)
+print('predictions: ',predictions)

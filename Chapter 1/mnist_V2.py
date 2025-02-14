@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
+import datetime
 
 # network and training
 EPOCHS = 50
@@ -48,14 +49,19 @@ model.add(keras.layers.Dense(NB_CLASSES,
 model.summary()
 
 # compiling the model
-model.compile(optimizer='SGD', 
+model.compile(optimizer='RMSProp',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
+
+log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=1)
+
 
 #training the model
 model.fit(X_train, Y_train,
 		batch_size=BATCH_SIZE, epochs=EPOCHS,
-		verbose=VERBOSE, validation_split=VALIDATION_SPLIT)
+		verbose=VERBOSE, validation_split=VALIDATION_SPLIT
+		, callbacks=[tensorboard_callback])
 
 #evaluate the model
 test_loss, test_acc = model.evaluate(X_test, Y_test)
