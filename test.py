@@ -1,7 +1,15 @@
 import tensorflow as tf
+from sklearn.preprocessing import LabelEncoder
+# Example class vector
+y = ['alex','tom','yost','eric']
 
-v1 = tf.constant([1,2,3,4])
-v2 = tf.constant([2,1,5,3])
-v_add = tf.add(v1, v2)
-with tf.Session() as sess:
-    print(sess.run(v_add))
+label_encoder = LabelEncoder()
+y_int = label_encoder.fit_transform(y)
+print(y_int)
+# Number of classes
+num_classes = len(label_encoder.classes_)
+
+# Convert class vector to binary class matrix
+y_categorical = tf.keras.utils.to_categorical(y_int, num_classes)
+
+print(y_categorical)

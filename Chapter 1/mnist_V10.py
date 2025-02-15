@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow import keras
+import pydot
 
 # network and training
 EPOCHS = 20
@@ -49,7 +50,7 @@ model.add(keras.layers.Dense(NB_CLASSES,
 
 # summary of the model
 model.summary()
-
+# tf.keras.utils.plot_model(model, to_file='model.png')
 # compiling the model
 model.compile(optimizer='Adam', 
               loss='categorical_crossentropy',
