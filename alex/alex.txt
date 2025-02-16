@@ -1,0 +1,18 @@
+
+缺失的包
+conda install numpy=1.19.5
+pip install tensorflow_dataset
+conda install matplotlib
+conda install pandas
+pip install h5py-3.11.0
+
+covert.py 把ipynb转成py
+
+environment.yml不一定好用
+chapter7 create_embedding_with_text8.py 文件缺少 information.json 需要复制到相应的文件夹下
+
+导出环境
+conda env export > environment.yml
+创建环境
+conda env create -f environment.yml
+

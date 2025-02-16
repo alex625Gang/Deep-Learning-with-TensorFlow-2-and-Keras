@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
 
 import tensorflow as tf
 from tensorflow.keras import Model
@@ -14,8 +12,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow_datasets as tfds
 
-
-# In[2]:
 
 
 def normalize(input_image, label):  
@@ -42,7 +38,7 @@ test_A, test_B = dataset['testA'], dataset['testB']
 
 # In[5]:
 
-
+# 50次迭代，每次迭代1000个batch，图片大小为256*256
 BUFFER_SIZE = 1000
 BATCH_SIZE = 1
 IMG_WIDTH = 256
@@ -462,9 +458,6 @@ for batch_i, (imgs_A, imgs_B) in enumerate(zip(test_A, test_B)):
     count -= 1
     if count <= 0:
         break
-
-
-# In[ ]:
 
 
 

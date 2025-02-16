@@ -1,7 +1,8 @@
 import os
 import subprocess
 
-# Specify the directory containing the .ipynb files
+# Specify the directory containing the .ipynb files,
+# switch to your directory, e.x. D:/repo/Deep-Learning-with-TensorFlow-2-and-Keras/Chapter 7
 directory = r'D:/repo/Deep-Learning-with-TensorFlow-2-and-Keras/Chapter 6'
 
 # List all files in the directory

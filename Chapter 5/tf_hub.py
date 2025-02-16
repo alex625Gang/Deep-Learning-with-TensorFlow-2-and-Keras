@@ -4,7 +4,7 @@ import tensorflow_hub as hub
 import numpy as np
 import PIL.Image as Image
 
-
+# 从hub上下载预训练的模型
 classifier_url ="https://tfhub.dev/google/tf2-preview/mobilenet_v2/classification/2" #@param {type:"string"}
 
 IMAGE_SHAPE = (224, 224)

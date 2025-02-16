@@ -15,8 +15,10 @@ im.astype(np.float32)
 
 # predict
 out = model.predict(im)
+print('length of out : ',len(out[0]))
+print(type(out))
 index = np.argmax(out)
 print(index)
 
-#plt.plot(out.ravel())
-#plt.show()
+plt.plot(out.ravel())
+plt.show()

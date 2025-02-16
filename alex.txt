@@ -1,4 +1,0 @@
-conda install numpy=1.19.5
-pip install tensorflow_dataset
-conda install matplotlib
-conda install pandas

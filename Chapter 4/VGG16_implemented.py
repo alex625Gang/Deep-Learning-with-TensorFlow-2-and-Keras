@@ -69,4 +69,6 @@ model.summary()
 model.compile(optimizer='sgd', loss='categorical_crossentropy')
 out = model.predict(im)
 print(np.argmax(out))
+# C:\Users\user  so expanduser("~") returns home path of user
+print(os.path.expanduser("~"))
   
